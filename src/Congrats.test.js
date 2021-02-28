@@ -8,29 +8,32 @@ import { findByTestAttr,checkProps } from '../test/testUtils';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const defaultProps = { success:false};
+
 const setup = (props={})=>{
-    return shallow(<Congrats {...props}/>);
+    const setupProps = {...defaultProps, ...props };
+    return shallow(<Congrats {...setupProps}/>);
 }
 
 test('renders withou error', ()=>{
-    const wrapper = setup();
+    const wrapper = setup({success: false});
     const component = findByTestAttr(wrapper, 'component-congrats');
     expect(component.length).toBe(1);
 })
-test('renders no text when "sucess" props is false', ()=>{
-    const wrapper = setup({sucess: false});
+test('renders no text when "success" props is false', ()=>{
+    const wrapper = setup({success: false});
     const component = findByTestAttr(wrapper, 'component-congrats');
 
     expect(component.text()).toBe('');
 });
-test('renders no-empty congrats when message "sucess"',()=>{
-    const wrapper = setup({sucess: true});
+test('renders no-empty congrats when message "success"',()=>{
+    const wrapper = setup({success: true});
     const message = findByTestAttr(wrapper, 'congrats-message');
 
     expect(message.text().length).not.toBe(0);
 })
 
 test('does not throw warning with expected props',() =>{
-    const expectedProps = { sucess:false };
+    const expectedProps = { success:false };
     checkProps(Congrats,expectedProps);
 })

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -7,10 +6,10 @@ import PropTypes from 'prop-types';
  * 
  * @function
  * @param {object} props - React props
- * @returns {JSX.Element} - Rendered component (or null if 'sucess' props is false)
+ * @returns {JSX.Element} - Rendered component (or null if 'success' props is false)
  */
-export default (props) => {
-    if (props.sucess) {
+const Congrats = (props) => {
+    if (props.success) {
         return (
             <div data-test="component-congrats">
                 <span data-test="congrats-message">
@@ -24,3 +23,9 @@ export default (props) => {
         );
     }
 }
+
+
+Congrats.propTypes ={
+    success: PropTypes.bool.isRequired
+}
+export default Congrats;
