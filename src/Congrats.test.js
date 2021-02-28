@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import checkPropTypes from 'check-prop-types';
 
 import Congrats from './Congrats';
-import { findByTestAttr } from '../test/testUtils';
+import { findByTestAttr,checkProps } from '../test/testUtils';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -29,3 +30,7 @@ test('renders no-empty congrats when message "sucess"',()=>{
     expect(message.text().length).not.toBe(0);
 })
 
+test('does not throw warning with expected props',() =>{
+    const expectedProps = { sucess:false };
+    checkProps(Congrats,expectedProps);
+})
